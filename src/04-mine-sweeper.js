@@ -21,8 +21,61 @@
  *  [1, 1, 1]
  * ]
  */
-function minesweeper(/* matrix */) {
-  throw new Error('Not implemented');
+function minesweeper(matrix) {
+  const result = [];
+  for (let i = 0; i < matrix.length; i++) {
+    result[i] = matrix[i].slice();
+  }
+
+  for (let i = 0; i < matrix.length; i++) {
+    for (let j = 0; j < matrix.length; j++) {
+      let count = 0;
+
+      if (Boolean(matrix[i][j]) === true) {
+        count = 1;
+      } else {
+        if (i - 1 >= 0 && Boolean(matrix[i - 1][j]) === true) {
+          count++;
+        }
+
+        if (i + 1 < matrix.length && Boolean(matrix[i + 1][j]) === true) {
+          count++;
+        }
+
+        if (j - 1 >= 0 && Boolean(matrix[i][j - 1]) === true) {
+          count++;
+        }
+
+        if (j + 1 < matrix.length && Boolean(matrix[i][j + 1]) === true) {
+          count++;
+        }
+
+        if (i + 1 >= 0 && i + 1 < matrix.length && j + 1 >= 0 && j + 1 < matrix.length
+          && Boolean(matrix[i + 1][j + 1]) === true) {
+          count++;
+        }
+
+        if (i - 1 >= 0 && i - 1 < matrix.length && j - 1 >= 0 && j - 1 < matrix.length
+          && Boolean(matrix[i - 1][j - 1]) === true) {
+          count++;
+        }
+
+        if (i + 1 >= 0 && i + 1 < matrix.length && j - 1 >= 0 && j - 1 < matrix.length
+          && Boolean(matrix[i + 1][j - 1]) === true) {
+          count++;
+        }
+
+        if (i - 1 >= 0 && i - 1 < matrix.length && j + 1 >= 0 && j + 1 < matrix.length
+          && Boolean(matrix[i - 1][j + 1]) === true) {
+          count++;
+        }
+      }
+
+      result[i][j] = count;
+    }
+  }
+
+  return result;
 }
 
 module.exports = minesweeper;
