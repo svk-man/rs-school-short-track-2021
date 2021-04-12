@@ -9,18 +9,15 @@
  *
  */
 function encodeLine(str) {
+  let count = 1;
   let result = '';
   for (let i = 0; i < str.length; i++) {
-    let count = 0;
     const el = str.charAt(i);
-    for (let j = 0; j < str.length; j++) {
-      if (str.charAt(j) === el) {
-        count++;
-      }
-    }
-
-    if (!result.includes(str.charAt(i))) {
-      result += (count + str.charAt(i));
+    if (i + 1 < str.length && el === str.charAt(i + 1)) {
+      count++;
+    } else {
+      result += ((count > 1 ? count : '') + el);
+      count = 1;
     }
   }
 
